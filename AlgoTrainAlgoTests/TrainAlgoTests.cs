@@ -11,10 +11,45 @@ namespace AlgoTrain.AlgoTests
     [TestClass()]
     public class TrainAlgoTests
     {
-        [TestMethod()]
-        public void CheckIfAnimalFitAlgoTests()
+        private List<Animal> TestAnimals;
+
+        private Train SetTest()
         {
-            Assert.Fail();
+            TestAnimals = new List<Animal>();
+            Train testTrain = new Train();
+
+            for (int i = 0; i < 5; i++)
+            {
+                TestAnimals.Add(new Animal("Test","Carnivore","Big"));
+            }
+
+            testTrain.AllAnimals = TestAnimals;
+            testTrain.TrainLoop();
+
+            return testTrain;
         }
+
+        [TestMethod()]
+        public void CheckAlgoritme()
+        {
+            //Setup the tests
+            Train testTrain = SetTest();
+
+            int result = testTrain.Wagons.Count;
+
+            Assert.AreEqual(5, result);
+        }
+
+        [TestMethod()]
+        public void CheckwagonCap()
+        {
+            //Setup the tests
+            Train testTrain = SetTest();
+
+            int result = testTrain.Wagons[1].WagonCapacity;
+
+            Assert.AreEqual(5, result);
+        }
+
     }
 }
