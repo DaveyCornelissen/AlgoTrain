@@ -30,7 +30,7 @@ namespace AlgoTrain.AlgoTests
         }
 
         [TestMethod()]
-        public void CheckAlgoritme()
+        public void CheckTotalWagons()
         {
             //Setup the tests
             Train testTrain = SetTest();
@@ -46,7 +46,7 @@ namespace AlgoTrain.AlgoTests
             //Setup the tests
             Train testTrain = SetTest();
 
-            int result = testTrain.Wagons[1].WagonCapacity;
+            int result = testTrain.Wagons[0].WagonCapacity;
 
             Assert.AreEqual(5, result);
         }
