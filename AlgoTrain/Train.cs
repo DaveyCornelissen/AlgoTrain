@@ -30,7 +30,7 @@ namespace AlgoTrain
                     }
                     else
                     {
-                        bool addAnimal = CheckIfAnimalFit(SelectedWagon, SelectedAnimal);
+                        bool addAnimal = SelectedWagon.CheckIfAnimalFit(SelectedWagon, SelectedAnimal);
 
                         if (addAnimal)
                         {
@@ -41,17 +41,6 @@ namespace AlgoTrain
                 }
                 SelectedWagon.isFull = true;
             }
-        }
-
-        //acutale algoritem
-        private bool CheckIfAnimalFit(Wagon _selectedWagon, Animal _selectedAnimal)
-        {
-            var condition = _selectedWagon.AnimalsInWagon.Where(a => (a.Size >= _selectedAnimal.Size || a.Size <= _selectedAnimal.Size) && a.Type == 0);
-            int _cap = _selectedWagon.WagonCapacity;
-
-            bool fitAnimal = condition.ToList().Count == 0 &&
-                             (_cap += _selectedAnimal.Capacity) <= 10;
-            return fitAnimal;
         }
 
         private Wagon FindNewWagon()
