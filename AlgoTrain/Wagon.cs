@@ -19,12 +19,27 @@ namespace AlgoTrain
         //acutale algoritem
         public bool CheckIfAnimalFit(Wagon _selectedWagon, Animal _selectedAnimal)
         {
-            var condition = _selectedWagon.AnimalsInWagon.Where(a => (a.Size >= _selectedAnimal.Size || a.Size <= _selectedAnimal.Size) && a.Type == 0);
-            int _cap = _selectedWagon.WagonCapacity;
+            if (_selectedAnimal.Type == 0)
+            {
+                var condition = _selectedWagon.AnimalsInWagon.Where(a => a.Size <= _selectedAnimal.Size);
 
-            bool fitAnimal = condition.ToList().Count == 0 &&
-                             (_cap += _selectedAnimal.Capacity) <= 10;
-            return fitAnimal;
+                int _cap = _selectedWagon.WagonCapacity;
+
+                bool fitAnimal = condition.ToList().Count == 0 &&
+                                 (_cap += _selectedAnimal.Capacity) <= 10 && !_selectedWagon.containCarnivore;
+                return fitAnimal;
+            }
+            else
+            {
+                var condition = _selectedWagon.AnimalsInWagon.Where(a => (a.Size >= _selectedAnimal.Size) && (a.Type == 0));
+
+                int _cap = _selectedWagon.WagonCapacity;
+
+                bool fitAnimal = condition.ToList().Count == 0 &&
+                                 (_cap += _selectedAnimal.Capacity) <= 10;
+                return fitAnimal;
+            }
+            
         }
 
         public void AddAnimalToWagon(Animal _newAnimal)
